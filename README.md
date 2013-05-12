@@ -1,6 +1,31 @@
 # EmptyPort
 
-TODO: Write a gem description
+take an empty port.
+
+## Usage
+  require 'empty_port'
+  class YourServerTest < Test::Unit::TestCase
+      def setup
+        empty_port = EmptyPort.get
+        pid = Process.fork do
+          server = TCPServer.open('localhost', empty_port)
+        end
+        EmptyPort.wait(random_port)
+        @port = empty_port
+        @server_pid = pid
+      end
+
+      def test_something_with_server
+      end
+
+      def teardown
+        Process.kill(@server_pid)
+      end
+  end
+
+## DESCRIPTION
+
+This library is useful when you test servers or client libraries.
 
 ## Installation
 
@@ -16,9 +41,9 @@ Or install it yourself as:
 
     $ gem install empty_port
 
-## Usage
+## THANKS
 
-TODO: Write usage instructions here
+ * tokuhirom: This library is inspired by [Test::TCP](http://metacpan.org/module/Test::TCP)
 
 ## Contributing
 
