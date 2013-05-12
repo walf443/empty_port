@@ -10,7 +10,7 @@ require 'timeout'
 #         pid = Process.fork do
 #           server = TCPServer.open('localhost', empty_port)
 #         end
-#         EmptyPort.wait(random_port)
+#         EmptyPort.wait(empty_port)
 #         @port = empty_port
 #         @server_pid = pid
 #       end
