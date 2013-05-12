@@ -6,13 +6,11 @@ take an empty port.
     require 'empty_port'
     class YourServerTest < Test::Unit::TestCase
         def setup
-          empty_port = EmptyPort.get
-          pid = Process.fork do
-            server = TCPServer.open('localhost', empty_port)
+          @port = EmptyPort.get
+          @server_pid = Process.fork do
+            server = TCPServer.open('localhost', @port)
           end
-          EmptyPort.wait(empty_port)
-          @port = empty_port
-          @server_pid = pid
+          EmptyPort.wait(@port)
         end
 
         def test_something_with_server
