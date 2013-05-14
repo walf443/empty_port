@@ -29,6 +29,7 @@ take an empty port.
 	at_exit do
 		Process.kill(:TERM, pid)
 	end
+	EmptyPort.wait(port)
 
 	# do something with memcached.
 
