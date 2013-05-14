@@ -3,6 +3,7 @@
 take an empty port.
 
 ## Usage
+	# 1. in case writing test for your server with empty_port
     require 'empty_port'
     class YourServerTest < Test::Unit::TestCase
         def setup
@@ -20,6 +21,16 @@ take an empty port.
           Process.kill(@server_pid)
         end
     end
+
+	# 2. in case writing for memcached test with empty_port
+
+	port = EmptyPort.get
+	pid = Process.spawn("memcached -p #{port}")
+	at_exit do
+		Process.kill(:TERM, pid)
+	end
+
+	# do something with memcached.
 
 ## DESCRIPTION
 
